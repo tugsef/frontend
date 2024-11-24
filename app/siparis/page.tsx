@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import classNames from "classnames";
 import { SiparisHeader } from "@/components/siparis-header";
@@ -73,15 +73,17 @@ function SiparisPage() {
       {loading ? (
         <p>Yükleniyor...</p>
       ) : (
-        <ul className="space-y-4 text-sm">
-          {orderData.length > 0 ? (
-            orderData.map((order, index) => (
-              <OrderItemComponent key={order.orderId} order={order} />
-            ))
-          ) : (
-            <p>Veri bulunamadı.</p>
-          )}
-        </ul>
+        <Suspense fallback={<p>Veriler yükleniyor...</p>}>
+          <ul className="space-y-4 text-sm">
+            {orderData.length > 0 ? (
+              orderData.map((order, index) => (
+                <OrderItemComponent key={order.orderId} order={order} />
+              ))
+            ) : (
+              <p>Veri bulunamadı.</p>
+            )}
+          </ul>
+        </Suspense>
       )}
     </div>
   );
