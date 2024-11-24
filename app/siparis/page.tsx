@@ -1,5 +1,5 @@
-"use client";
-import React, { useEffect, useState, Suspense } from "react";
+"use client"
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import classNames from "classnames";
 import { SiparisHeader } from "@/components/siparis-header";
@@ -73,17 +73,15 @@ function SiparisPage() {
       {loading ? (
         <p>Yükleniyor...</p>
       ) : (
-        <Suspense fallback={<p>Veriler yükleniyor...</p>}>
-          <ul className="space-y-4 text-sm">
-            {orderData.length > 0 ? (
-              orderData.map((order, index) => (
-                <OrderItemComponent key={order.orderId} order={order} />
-              ))
-            ) : (
-              <p>Veri bulunamadı.</p>
-            )}
-          </ul>
-        </Suspense>
+        <ul className="space-y-4 text-sm">
+          {orderData.length > 0 ? (
+            orderData.map((order, index) => (
+              <OrderItemComponent key={order.orderId} order={order} />
+            ))
+          ) : (
+            <p>Veri bulunamadı.</p>
+          )}
+        </ul>
       )}
     </div>
   );
@@ -145,4 +143,10 @@ const OrderItemComponent: React.FC<OrderItemProps> = ({ order }) => {
   );
 };
 
-export default SiparisPage;
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SiparisPage />
+    </Suspense>
+  );
+}
