@@ -17,7 +17,7 @@ export default function Home() {
   const onClickHandle = async () => {
     try {
       setError(null); // Hataları sıfırla
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eleman/login`, {
+      const res = await fetch(`${process.env.BACKEND_API_URL}/api/eleman/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

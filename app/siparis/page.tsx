@@ -31,7 +31,7 @@ function SiparisPage() {
     const fetchOrderData = async () => {
       setLoading(true);
       try {
-        let url = `${process.env.NEXT_PUBLIC_API_URL}/api/siparis?firmaId=${firmaId}`;  // API URL'i ortam değişkeninden alınır
+        let url = `${process.env.BACKEND_API_URL}/api/siparis?firmaId=${firmaId}`;  // API URL'i ortam değişkeninden alınır
         if (orderStatus) url += `&orderStatus=${orderStatus}`;
 
         const response = await axios.get(url, { timeout: 10000 });
